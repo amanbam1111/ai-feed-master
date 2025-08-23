@@ -2,41 +2,70 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* AI-Powered Social Media Scheduler Design System */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Dark theme base colors */
+    --background: 222 84% 4.9%;
+    --foreground: 210 40% 98%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    /* Glass morphism card backgrounds */
+    --card: 222 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --glass: 222 84% 4.9% / 0.8;
+    --glass-border: 210 40% 98% / 0.1;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    /* Popover styling */
+    --popover: 220 27% 9%;
+    --popover-foreground: 210 40% 98%;
 
-    --primary: 222.2 47.4% 11.2%;
+    /* Brand gradient colors */
+    --primary: 262 83% 58%;
     --primary-foreground: 210 40% 98%;
+    --primary-glow: 262 83% 68%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Secondary brand colors */
+    --secondary: 220 27% 12%;
+    --secondary-foreground: 210 40% 98%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Muted elements */
+    --muted: 220 27% 12%;
+    --muted-foreground: 215 20.2% 65.1%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Accent colors for highlights */
+    --accent: 220 27% 15%;
+    --accent-foreground: 210 40% 98%;
 
-    --destructive: 0 84.2% 60.2%;
+    /* Platform-specific colors */
+    --instagram: 316 75% 60%;
+    --linkedin: 210 100% 50%;
+    --twitter: 195 100% 50%;
+    --facebook: 221 83% 53%;
+
+    /* Status colors */
+    --success: 142 76% 36%;
+    --warning: 38 92% 50%;
+    --destructive: 0 84% 60%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    /* Interactive elements */
+    --border: 220 27% 15%;
+    --input: 220 27% 12%;
+    --ring: 262 83% 58%;
 
-    --radius: 0.5rem;
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(262 83% 58%), hsl(262 83% 68%));
+    --gradient-secondary: linear-gradient(135deg, hsl(220 27% 12%), hsl(220 27% 18%));
+    --gradient-glass: linear-gradient(135deg, hsl(222 84% 4.9% / 0.8), hsl(220 27% 9% / 0.6));
+    --gradient-brand: linear-gradient(135deg, hsl(262 83% 58%), hsl(316 75% 60%), hsl(195 100% 50%));
+
+    /* Shadows and effects */
+    --shadow-glass: 0 8px 32px hsl(222 84% 4.9% / 0.4);
+    --shadow-elevated: 0 20px 40px hsl(222 84% 4.9% / 0.6);
+    --shadow-glow: 0 0 40px hsl(262 83% 58% / 0.3);
+
+    --radius: 0.75rem;
 
     --sidebar-background: 0 0% 98%;
 
@@ -99,7 +128,31 @@ All colors MUST be HSL.
     @apply border-border;
   }
 
-  body {
-    @apply bg-background text-foreground;
+}
+
+/* Glassmorphism and Animation Utilities */
+@layer components {
+  .glass-card {
+    @apply bg-gradient-to-br from-glass to-transparent border border-glass-border backdrop-blur-xl shadow-glass;
+  }
+  
+  .glass-button {
+    @apply bg-gradient-to-r from-primary to-primary-glow text-primary-foreground border-0 shadow-glow transition-all duration-300 hover:shadow-elevated hover:scale-105;
+  }
+  
+  .platform-instagram {
+    @apply bg-gradient-to-r from-pink-500 to-purple-600;
+  }
+  
+  .platform-linkedin {
+    @apply bg-gradient-to-r from-blue-600 to-blue-500;
+  }
+  
+  .platform-twitter {
+    @apply bg-gradient-to-r from-cyan-500 to-blue-400;
+  }
+  
+  .platform-facebook {
+    @apply bg-gradient-to-r from-blue-700 to-indigo-600;
   }
 }

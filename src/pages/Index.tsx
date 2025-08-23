@@ -1,13 +1,58 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useState } from 'react';
+import { Layout } from '@/components/Layout';
+import { Dashboard } from '@/components/Dashboard';
+import { Calendar } from '@/components/Calendar';
+import { AIGenerator } from '@/components/AIGenerator';
+import { Analytics } from '@/components/Analytics';
+import { PostsManagement } from '@/components/PostsManagement';
+import { CreatePostModal } from '@/components/CreatePostModal';
 
 const Index = () => {
+  const [activeTab, setActiveTab] = useState('dashboard');
+  const [isCreatePostOpen, setIsCreatePostOpen] = useState(false);
+
+  const renderContent = () => {
+    switch (activeTab) {
+      case 'dashboard':
+        return (
+          <Dashboard 
+            onCreatePost={() => setIsCreatePostOpen(true)}
+            onOpenAIGenerator={() => setActiveTab('ai-generator')}
+          />
+        );
+      case 'calendar':
+        return <Calendar onCreatePost={() => setIsCreatePostOpen(true)} />;
+      case 'create':
+        setIsCreatePostOpen(true);
+        setActiveTab('dashboard');
+        return null;
+      case 'ai-generator':
+        return <AIGenerator />;
+      case 'analytics':
+        return <Analytics />;
+      case 'posts':
+        return <PostsManagement />;
+      default:
+        return (
+          <Dashboard 
+            onCreatePost={() => setIsCreatePostOpen(true)}
+            onOpenAIGenerator={() => setActiveTab('ai-generator')}
+          />
+        );
+    }
+  };
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
-    </div>
+    <>
+      <Layout activeTab={activeTab} onTabChange={setActiveTab}>
+        {renderContent()}
+      </Layout>
+      
+      <CreatePostModal 
+        isOpen={isCreatePostOpen} 
+        onClose={() => setIsCreatePostOpen(false)} 
+      />
+    </>
   );
 };
 
