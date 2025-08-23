@@ -14,13 +14,230 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      ai_generations: {
+        Row: {
+          created_at: string
+          generated_content: string
+          hashtags: string[] | null
+          id: string
+          industry: string | null
+          platform: string
+          prompt: string
+          tone: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          generated_content: string
+          hashtags?: string[] | null
+          id?: string
+          industry?: string | null
+          platform: string
+          prompt: string
+          tone: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          generated_content?: string
+          hashtags?: string[] | null
+          id?: string
+          industry?: string | null
+          platform?: string
+          prompt?: string
+          tone?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      analytics: {
+        Row: {
+          comments: number | null
+          created_at: string
+          date: string
+          id: string
+          impressions: number | null
+          likes: number | null
+          platform: string
+          post_id: string | null
+          reach: number | null
+          shares: number | null
+          user_id: string
+        }
+        Insert: {
+          comments?: number | null
+          created_at?: string
+          date: string
+          id?: string
+          impressions?: number | null
+          likes?: number | null
+          platform: string
+          post_id?: string | null
+          reach?: number | null
+          shares?: number | null
+          user_id: string
+        }
+        Update: {
+          comments?: number | null
+          created_at?: string
+          date?: string
+          id?: string
+          impressions?: number | null
+          likes?: number | null
+          platform?: string
+          post_id?: string | null
+          reach?: number | null
+          shares?: number | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "analytics_post_id_fkey"
+            columns: ["post_id"]
+            isOneToOne: false
+            referencedRelation: "social_posts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string
+          full_name: string | null
+          id: string
+          posts_used_this_month: number
+          stripe_customer_id: string | null
+          stripe_subscription_id: string | null
+          subscription_end_date: string | null
+          subscription_status: string | null
+          subscription_tier: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string
+          full_name?: string | null
+          id?: string
+          posts_used_this_month?: number
+          stripe_customer_id?: string | null
+          stripe_subscription_id?: string | null
+          subscription_end_date?: string | null
+          subscription_status?: string | null
+          subscription_tier?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string
+          full_name?: string | null
+          id?: string
+          posts_used_this_month?: number
+          stripe_customer_id?: string | null
+          stripe_subscription_id?: string | null
+          subscription_end_date?: string | null
+          subscription_status?: string | null
+          subscription_tier?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      social_accounts: {
+        Row: {
+          access_token: string
+          created_at: string
+          id: string
+          is_connected: boolean
+          platform: string
+          platform_user_id: string
+          platform_username: string | null
+          refresh_token: string | null
+          token_expires_at: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          access_token: string
+          created_at?: string
+          id?: string
+          is_connected?: boolean
+          platform: string
+          platform_user_id: string
+          platform_username?: string | null
+          refresh_token?: string | null
+          token_expires_at?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          access_token?: string
+          created_at?: string
+          id?: string
+          is_connected?: boolean
+          platform?: string
+          platform_user_id?: string
+          platform_username?: string | null
+          refresh_token?: string | null
+          token_expires_at?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      social_posts: {
+        Row: {
+          content: string
+          created_at: string
+          engagement_data: Json | null
+          hashtags: string[] | null
+          id: string
+          image_url: string | null
+          platform: string
+          scheduled_time: string | null
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          engagement_data?: Json | null
+          hashtags?: string[] | null
+          id?: string
+          image_url?: string | null
+          platform: string
+          scheduled_time?: string | null
+          status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          engagement_data?: Json | null
+          hashtags?: string[] | null
+          id?: string
+          image_url?: string | null
+          platform?: string
+          scheduled_time?: string | null
+          status?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      reset_monthly_usage: {
+        Args: Record<PropertyKey, never>
+        Returns: undefined
+      }
     }
     Enums: {
       [_ in never]: never
