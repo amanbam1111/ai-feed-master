@@ -147,41 +147,35 @@ export type Database = {
       }
       social_accounts: {
         Row: {
-          access_token: string
           created_at: string
           id: string
           is_connected: boolean
           platform: string
           platform_user_id: string
           platform_username: string | null
-          refresh_token: string | null
-          token_expires_at: string | null
+          token_reference_id: string | null
           updated_at: string
           user_id: string
         }
         Insert: {
-          access_token: string
           created_at?: string
           id?: string
           is_connected?: boolean
           platform: string
           platform_user_id: string
           platform_username?: string | null
-          refresh_token?: string | null
-          token_expires_at?: string | null
+          token_reference_id?: string | null
           updated_at?: string
           user_id: string
         }
         Update: {
-          access_token?: string
           created_at?: string
           id?: string
           is_connected?: boolean
           platform?: string
           platform_user_id?: string
           platform_username?: string | null
-          refresh_token?: string | null
-          token_expires_at?: string | null
+          token_reference_id?: string | null
           updated_at?: string
           user_id?: string
         }
