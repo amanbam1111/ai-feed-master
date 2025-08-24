@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { CalendarDays, LayoutDashboard, Plus, BarChart3, FileText, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { UserMenu } from '@/components/UserMenu';
 import { cn } from '@/lib/utils';
 
 interface LayoutProps {
@@ -95,11 +96,7 @@ export function Layout({ children, activeTab, onTabChange }: LayoutProps) {
               </p>
             </div>
             
-            <div className="flex items-center gap-4">
-              <div className="w-8 h-8 bg-gradient-primary rounded-full flex items-center justify-center">
-                <span className="text-sm font-medium text-white">JD</span>
-              </div>
-            </div>
+            <UserMenu variant="header" showNotifications={true} />
           </div>
         </header>
 

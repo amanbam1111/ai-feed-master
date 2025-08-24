@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from '@/contexts/AuthContext';
 import { ProtectedRoute } from '@/components/ProtectedRoute';
+import { SessionWarning } from '@/components/SessionWarning';
 import { LandingPage } from '@/pages/LandingPage';
 import { AuthPage } from '@/pages/AuthPage';
 import { ProfilePage } from '@/pages/ProfilePage';
@@ -19,6 +20,7 @@ const App = () => (
       <AuthProvider>
         <Toaster />
         <Sonner />
+        <SessionWarning />
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<LandingPage />} />

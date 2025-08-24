@@ -166,17 +166,51 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   const signOut = async () => {
-    const { error } = await supabase.auth.signOut();
-    
-    if (error) {
+    try {
+      // Clear any pending timers or intervals
+      const currentUrl = window.location.pathname;
+      
+      // Save current route for potential return after relogin (if remember me is enabled)
+      const rememberMe = localStorage.getItem('rememberMe');
+      if (rememberMe) {
+        localStorage.setItem('lastRoute', currentUrl);
+      }
+      
+      const { error } = await supabase.auth.signOut();
+      
+      if (error) {
+        toast({
+          title: "Sign Out Error",
+          description: error.message,
+          variant: "destructive"
+        });
+        return { error };
+      }
+
+      // Clear user state immediately
+      setUser(null);
+      setSession(null);
+      setProfile(null);
+      
+      // Clear sensitive data from localStorage (but keep preferences if remember me is enabled)
+      if (!rememberMe) {
+        localStorage.removeItem('userPreferences');
+        localStorage.removeItem('lastRoute');
+      }
+      
+      // Force redirect to landing page
+      window.location.href = '/';
+      
+      return { error: null };
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
       toast({
         title: "Sign Out Error",
-        description: error.message,
+        description: errorMessage,
         variant: "destructive"
       });
+      return { error: errorMessage };
     }
-    
-    return { error };
   };
 
   const updateProfile = async (updates: Partial<Profile>) => {
